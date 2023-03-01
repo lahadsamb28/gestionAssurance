@@ -21,4 +21,6 @@ class Proprietaire extends Model
         'email',
         'profession',
     ];
+
+
 }

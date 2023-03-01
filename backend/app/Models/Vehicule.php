@@ -20,4 +20,5 @@ class Vehicule extends Model
         'transmission',
         'energie',
     ];
+
 }

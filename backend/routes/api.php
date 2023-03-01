@@ -19,15 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)->group(function (){
     Route::post('inscription', 'Inscription');
-    Route::post('connexion', 'Connexion');
+    Route::post('login', 'Connexion');
 });
+
 
 Route::middleware(['auth:sanctum'])->group(function (){
     Route::post('logout', [UserController::class, 'Logout']);
 
 
     Route::controller(AttestationController::class)->group(function (){
-
+        Route::post('ajouter_certificat', 'ajouter_certificat');
     });
 
 

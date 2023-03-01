@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('certificats', function (Blueprint $table) {
             $table->id();
-            $table->date('date_delivrance');
-            $table->date('date_expiration');
+            $table->enum('typeCertificat', ['vip', 'premium', 'standard']);
+            $table->timestamp('date_delivrance');
+            $table->timestamp('date_expiration');
             $table->unsignedBigInteger('stock');
             $table->unsignedBigInteger('proprietaire');
             $table->unsignedBigInteger('vehicule');

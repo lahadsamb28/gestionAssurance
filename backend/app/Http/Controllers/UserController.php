@@ -14,18 +14,21 @@ class UserController extends Controller
 
     public function Inscription(Request $request){
         $request->validate([
+            'typeOfUser' => 'required|in:admin,simple',
             'NIN' => 'required|numeric|min:8',
             'name' => 'required|string',
-            'gender' => 'required',
+            'gender' => 'required|in:HOMME,FEMME',
             'dateOfBirth' => 'required',
             'phone' => 'required|numeric|min:8',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:users,email',
             'login' => 'required|unique:users,login|alpha_num|min:8',
             'password' => 'required|confirmed|alpha_num|between:8,30',
         ]);
 
         $inputs = $request->all();
         $inputs["password"] = bcrypt($inputs["password"]);
+        $inputs["password_confirmation"] = bcrypt($inputs["password"]);
+        // dd($inputs);
 
         $users = User::create($inputs);
         $token = $users->createToken($request->login)->plainTextToken;
@@ -38,6 +41,8 @@ class UserController extends Controller
 
     }
 
+
+    /** Login */
     public function Connexion(Request $request)
     {
         try{
