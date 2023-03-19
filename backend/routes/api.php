@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckBanned;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,22 +19,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(UserController::class)->group(function (){
-    Route::post('inscription', 'Inscription');
-    Route::post('login', 'Connexion');
+    Route::post('signup', 'Signup');
+    Route::post('login', 'Login');
+    Route::get('profil/show', 'Show')->middleware(['auth:sanctum']);
+    Route::get('profil/edit/{id}', 'Edit')->middleware(['auth:sanctum']);
+    Route::put('profil/{id}', 'Update')->middleware(['auth:sanctum']);
+    Route::delete('profil/delete/{id}', 'Delete')->middleware(['auth:sanctum']);
+    Route::post('logout', 'Logout')->middleware(['auth:sanctum']);
+
 });
 
 
 Route::middleware(['auth:sanctum'])->group(function (){
-    Route::post('logout', [UserController::class, 'Logout']);
-
-
     Route::controller(AttestationController::class)->group(function (){
-        Route::post('ajouter_certificat', 'ajouter_certificat');
+        Route::post('attestation/add', 'AddAttestation');
+        Route::get('attestation/show', 'ShowAttestations');
+        Route::get('attestation/edit/{id}', 'GetAttestation');
+        Route::put('attestation/update/{id}', 'UpdateAttestation');
+        Route::delete('attestation/delete/{id}', 'DeleteAttestation');
+        Route::delete('attestation/proprietaire/delete/{id}', 'DeleteAttestationProprio');
+        Route::delete('attestation/vehicule/delete/{id}', 'DeleteAttestationVehicule');
     });
 
 
     Route::controller(StockController::class)->group(function (){
-        Route::post('ajouter_stock', 'AjoutStock');
+        Route::post('stock/add', 'AddStock');
+        Route::get('stock/show', 'ShowStocks');
+        Route::get('stock/edit/{id}', 'GetStock');
+        Route::put('stock/update/{id}', 'UpdateStock');
+        Route::delete('stock/delete/{id}', 'DeleteStock');
 
     });
 });

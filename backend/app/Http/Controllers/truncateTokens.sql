@@ -1,0 +1,1 @@
+TRUNCATE personal_access_tokens RESTART IDENTITY

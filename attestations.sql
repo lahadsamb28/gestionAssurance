@@ -1,0 +1,1 @@
+select * FROM public.certificats INNER JOIN public.proprietaires ON proprietaire = public.proprietaires.id JOIN vehicules ON vehicule = public.vehicules.id
