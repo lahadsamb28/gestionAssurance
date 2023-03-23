@@ -4,7 +4,6 @@ use App\Http\Controllers\AttestationController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckBanned;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

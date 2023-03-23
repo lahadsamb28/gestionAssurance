@@ -10,6 +10,7 @@ use App\Models\Vehicule;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 // *************************To Do: Update ATtestations*************************
@@ -43,17 +44,19 @@ class AttestationController extends Controller
 
         $certificatInputs = [
             'typeCertificat' => 'required|in:vip,premium,standard',
-            'stock' => 'bail|required|numeric|exists:App\Models\Stock,id'
         ];
 
+        //controle si le stock est epuise
+        $stock = Stock::where('stock_de', '=', Auth::id())->latest()->value('id');
 
         // validate all request for certificats
         $requestCertificat = $request->validate($certificatInputs);
 
-        //controle si le stock est epuise
-        $last_num_stock = Stock::where('id', $requestCertificat["stock"])->value("dernierNumeroAttestation");
-        $last_id_certificat = Certificat::where('stock', $requestCertificat["stock"])->latest()->value('id');
+        $requestCertificat["stock"] = $stock;
 
+
+        $last_num_stock = Stock::where('id','=', $requestCertificat["stock"])->value("dernierNumeroAttestation");
+        $last_id_certificat = Certificat::where('stock', '=', $requestCertificat["stock"])->latest()->value('id');
 
         //controle date delivrance and expiration
         $requestCertificat["date_delivrance"] = Carbon::now();
@@ -71,6 +74,9 @@ class AttestationController extends Controller
         try {
             if($last_id_certificat >= $last_num_stock){
                 throw new Exception("Ce stock est epuise", 403);
+            }
+            if(($last_num_stock - $last_id_certificat) == 1){
+                echo "derniere attestation dans ce stock veuillez ajouter un nouvel stock pour le prochain certificat";
             }
 
             if($request->has(app(Proprietaire::class)->getFillable())){
@@ -102,6 +108,7 @@ class AttestationController extends Controller
             $attestations = new Attestations;
             $attestations->stock_numero = $certificat->stock;
             $attestations->numero_attestation = $certificat->id;
+            $attestations->dernier_numero_stock = $last_num_stock;
             $attestations->save();
 
             if($certificat){
@@ -252,7 +259,6 @@ class AttestationController extends Controller
             if($certificat == null) throw new Exception('certificat not found', 404);
 
             $certificat->delete();
-            DB::table('certificats')->decrement('certificats.id');
             return response(null, 204);
         } catch (\Throwable $th) {
             //throw $th;
@@ -267,7 +273,6 @@ class AttestationController extends Controller
             if($proprietaire == null) throw new Exception('proprietaire not found', 404);
 
             $proprietaire->delete();
-            DB::table('proprietaires')->decrement('proprietaires.id');
             return response(null, 204);
         } catch (\Throwable $th) {
             //throw $th;
@@ -282,7 +287,6 @@ class AttestationController extends Controller
             if($vehicule == null) throw new Exception('vehicule not found', 404);
 
             $vehicule->delete();
-            DB::table('vehicules')->decrement('vehicules.id');
             return response(null, 204);
         } catch (\Throwable $th) {
             //throw $th;

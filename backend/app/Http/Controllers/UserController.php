@@ -148,7 +148,6 @@ class UserController extends Controller
             if($user == null){ throw new Exception('user not found', 404);}
 
             $user->delete();
-            DB::table('users')->decrement('id');
             return response(null, 204);
 
         } catch (\Throwable $th) {

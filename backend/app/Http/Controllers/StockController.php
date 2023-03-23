@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +15,17 @@ class StockController extends Controller
 
     public function AddStock(Request $request)
     {
+        $premiereAttestation = DB::table('stocks')->latest()->value('dernierNumeroAttestation');
+
         $request->validate([
             'nombreAttestations' => 'required|numeric',
-            'premierNumeroAttestation' => 'required|numeric',
         ]);
         $inputs = $request->all();
+        if($premiereAttestation == null){
+            $inputs["premierNumeroAttestation"] = 1;
+        }else{
+            $inputs["premierNumeroAttestation"] = $premiereAttestation + 1;
+        }
         $inputs['dernierNumeroAttestation'] = ($inputs['nombreAttestations'] + $inputs['premierNumeroAttestation']) - 1;
         $inputs["stock_de"] = Auth::id();
         $stocks = Stock::create($inputs);
@@ -88,7 +93,7 @@ class StockController extends Controller
             $stock->update($request->all());
             $stock->update(['dernierNumeroAttestation' => ($stock->nombreAttestations + $stock->premierNumeroAttestation) - 1]);
 
-            return response(['message' => 'stock mis a jour avec succes !'], 200);
+            return response(['stock'=>$stock,'message' => 'stock mis a jour avec succes !'], 200);
         }catch(\Throwable $th){
             return response()->json(['message' => $th->getMessage()], $th->getCode());
         }
@@ -100,7 +105,6 @@ class StockController extends Controller
             if($stock == null) throw new Exception('stock not found !', 404);
 
             $stock->delete();
-            DB::table('stocks')->decrement('stocks.id');
             return response(null, 204);
         } catch (\Throwable $th) {
             //throw $th;

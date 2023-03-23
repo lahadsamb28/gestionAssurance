@@ -13,6 +13,7 @@ class Attestations extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'stock_numero',
-        'numero_attestation'
+        'numero_attestation',
+        'dernier_numero_stock'
     ];
 }
