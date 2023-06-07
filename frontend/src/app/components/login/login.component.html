@@ -1,0 +1,45 @@
+  <div class="container main">
+    <div class="row">
+      <div class="alert alert-success" role="alert"  *ngIf="message">
+        <h6 class="alert-heading" >{{message}}</h6>
+      </div>
+      <div class="alert alert-danger" role="alert"  *ngIf="errMessage">
+        <h6 class="alert-heading">{{errMessage}}</h6>
+      </div>
+      <div class="col-md-6 left">
+        <!-- image logo src css files -->
+      </div>
+
+      <div class="col-md-6 right">
+        <div class="oauth">
+          <button name="googleBtn" type="button"><span class="bi bi-google"></span> S'identifier avec Google</button>
+          <button name="fbkBtn" type="button"><span class="bi bi-apple"></span> S'identifier avec Apple</button>
+        </div>
+        <div class="trait"><hr><p>ou</p><hr></div>
+        <form (ngSubmit)="onSignin()" class="form-group" [formGroup]="loginForm">
+          <div class="input-box">
+            <header>Login</header>
+            <div class="input-field">
+              <input   type="text" class="input" name="username" required  formControlName="username">
+              <label for="username">Username</label>
+
+              <small *ngIf="Lf['username']?.invalid && Lf['username']?.touched" class="text-danger" [ngStyle]="{'margin-bottom': '15px'}">username is required</small>
+            </div>
+            <div class="input-field">
+              <input  type="password" class="input" name="password" required formControlName="password">
+              <label for="password" >Password</label>
+
+              <small *ngIf="Lf['password']?.invalid && Lf['password']?.touched" class="text-danger" [ngStyle]="{'margin-bottom': '15px'}">password is required</small>
+
+            </div>
+            <div class="input-field" id="submitDiv">
+              <button [disabled]="loginForm.invalid" type="submit" class="submit" id="submitBtn"> Sign In</button>
+            </div>
+          </div>
+          <div class="routeTo">
+            <span>Forget your password? <a routerLink="/reset_password">Reset here</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

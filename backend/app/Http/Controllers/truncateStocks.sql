@@ -1,1 +1,1 @@
-TRUNCATE TABLE proprietaires, vehicules, stocks, certificats, attestations RESTART IDENTITY
+TRUNCATE TABLE proprietaires, vehicules, stocks, certificats, attestations, users RESTART IDENTITY

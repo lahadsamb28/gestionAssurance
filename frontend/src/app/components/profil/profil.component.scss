@@ -1,0 +1,124 @@
+.main{
+  display: grid;
+  place-items: center;
+}
+.rowGroup{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  .username{
+    text-align: center;
+    padding: 0 12px;
+    margin: 0;
+    margin-top: -25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .bi{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-size: 10rem;
+  }
+}
+.inputsGroup{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.input-field{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0 10px 0 10px;
+  input,select{
+    height: 40px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    outline: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: black;
+    padding: 0 10px;
+  }
+  input[type=date] ~ label{
+    left: 20%;
+  }
+  label{
+    pointer-events:none;
+    font-size: 15px;
+    color: #4d4e56;
+    position: absolute;
+    left: 18px;
+    top: 15px;
+    transition: .5s;
+  }
+  .input:focus ~ label, .input:valid ~ label{
+    top: -10px;
+    font-size: 13px;
+  }
+  .input:focus, .input:valid{
+    border-radius: 10px;
+    border-bottom: 1px solid #743ae1;
+    box-shadow: 5px 5px #ececec;
+  }
+  .input.ng-touched.ng-invalid{
+    border-bottom: 1px solid red;
+  }
+  .input.ng-touched.ng-valid{
+    border-bottom: 1px solid green;
+  }
+}
+
+.submitDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+  .submit{
+    width: 125px;
+    border: none;
+    outline: none;
+    height: 45px;
+    background: #ececec;
+    border-radius: 10px;
+    transition: .3s;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0;
+  }
+  a[name=cancelBtn]{
+    margin-left: 10%;
+    text-decoration: none;
+    color: black;
+    // text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  a[name=cancelBtn]:hover{
+    color: #fff;
+    background: red;
+  }
+
+  .submit:hover{
+    background: rgba(37, 95, 156, 0.9);
+    color: #fff;
+  }
+  .submit:disabled:hover{
+    background: none;
+    cursor: not-allowed;
+    color: grey;
+  }
+
+}

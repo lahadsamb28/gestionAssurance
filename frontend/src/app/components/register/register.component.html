@@ -1,0 +1,143 @@
+  <div class="container main">
+    <div class="row rowGroup">
+      <div class="col-md-4 text"></div>
+      <div class="col-md-8 form-group">
+        <form class="form-box" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <header class="subtitle">Register Form</header>
+        <div class="alert alert-success" role="alert"  *ngIf="message">
+          <h6 class="alert-heading" >{{message}}</h6>
+        </div>
+        <div class="alert alert-danger" role="alert"  *ngIf="errMessage">
+          <h6 class="alert-heading">{{errMessage}}</h6>
+        </div>
+
+        <div class="row input-box">
+          <!-- ************************NIN****************** -->
+          <div class="col-md-6 input-field">
+            <input required type="text" class="input" name="NIN" formControlName="NIN">
+            <label for="NIN">NIN</label>
+            <!-- error div -->
+            <small class="text-danger" *ngIf="Rf['NIN']?.touched && Rf['NIN']?.invalid">
+              <span  *ngIf="Rf['NIN']?.hasError('pattern')" [ngStyle]="{'margin-right': '10px'}">Number Only</span>
+              <span *ngIf="Rf['NIN']?.hasError('minlength') || Rf['NIN']?.hasError('maxlength')">Invalid NIN</span>
+              <span *ngIf="Rf['NIN']?.hasError('required')">NIN required</span>
+            </small>
+            <!-- ************************* -->
+          </div>
+          <!-- *****************TYPE OF USER******************* -->
+          <div class="col-md-6 input-field">
+            <select name="typeOfUSer" class="input" required formControlName="typeOfUser">
+              <option disabled selected value></option>
+              <option *ngFor="let typeOfUSer of TypeOfUser" [ngValue]="typeOfUSer">{{typeOfUSer}}</option>
+            </select>
+            <label for="typeOfUSer">Type of user</label>
+            <!-- error div -->
+            <small class="text-danger" *ngIf="Rf['typeOfUser']?.touched && Rf['typeOfUser']?.invalid">
+              <Span> Type Of USer Required</Span>
+            </small>
+            <!-- ************************* -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <!-- ***************full Name******************** -->
+          <div class="col-md-6 input-field">
+            <input required type="text" class="input" name="name" formControlName="name">
+            <label for="name">Full Name</label>
+            <!-- *********ERROR DIV -->
+            <small class="text-danger" *ngIf="Rf['name']?.invalid && Rf['name']?.touched"> <span>Full Name Required</span></small>
+            <!-- ******************* -->
+          </div>
+          <!--****************** GENDER  *************-->
+          <div class="col-md-6 input-field">
+            <select name="gender" class="input" required formControlName="gender">
+              <option disbled selected value></option>
+              <option *ngFor="let gender of Gender" [ngValue]="gender">{{gender}}</option>
+            </select>
+            <label for="gender">Gender</label>
+            <!-- error div -->
+            <small class="text-danger" *ngIf="Rf['gender']?.touched && Rf['gender']?.invalid">
+              <span>Gender Required</span>
+            </small>
+            <!-- ************************* -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <!--********** DATE oF BIRTH*************-->
+          <div class="col-md-6 input-field">
+            <input required type="date" class="input" name="dateOfBirth" formControlName="dateOfBirth">
+            <label for="dateOfBirth" class="birth">Date Of Birth</label>
+            <!-- ************error*************** -->
+            <small class="text-danger" *ngIf="Rf['dateOfBirth']?.touched && Rf['dateOfBirth']?.invalid">
+              <span>DOB Required</span>
+            </small>
+            <!-- *********************** -->
+          </div>
+          <!-- **********TEL*********** -->
+          <div class="col-md-6 input-field">
+            <input required type="tel" class="input" name="phone" formControlName="phone">
+            <label for="phone">Tel</label>
+            <!-- ***************error************  -->
+            <small class="text-danger" *ngIf="Rf['phone']?.touched && Rf['phone']?.invalid">
+              <span  *ngIf="Rf['phone']?.hasError('pattern')" [ngStyle]="{'margin-right': '10px'}">invalid number</span>
+              <span *ngIf="Rf['phone']?.hasError('required')">phone required</span>
+            </small>
+            <!-- ***************************** -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <div class="col-md-6 input-field">
+            <input required type="email" class="input" name="email" formControlName="email">
+            <label for="email">Email</label>
+            <small class="text-danger" *ngIf="Rf['email']?.touched && Rf['email']?.invalid">
+              <span *ngIf="Rf['email']?.hasError('email')">invalid email</span>
+              <span *ngIf="Rf['email']?.hasError('required')">email Required</span>
+            </small>
+          </div>
+          <!-- *************** LOGIN***********-->
+          <div class="col-md-6 input-field">
+            <input required type="text" class="input" name="login" formControlName="login">
+            <label for="login">Login</label>
+            <!-- *************ERROR ************ -->
+            <small class="text-danger" *ngIf="Rf['login']?.touched && Rf['login']?.invalid">
+              <span *ngIf="Rf['login']?.hasError('pattern')">Login must contain 8 characteres and at least: <br> Lowercase letter. <br> Number</span>
+              <span *ngIf="Rf['login']?.hasError('required')">Login Required</span>
+            </small>
+            <!-- ****************************** -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <div class="col-md-6 input-field">
+            <input required type="password" class="input" name="password" formControlName="password">
+            <label for="password">Password</label>
+             <!-- *************ERROR ************ -->
+             <small class="text-danger" *ngIf="Rf['password']?.touched && Rf['password']?.invalid">
+              <span *ngIf="Rf['password']?.hasError('pattern')">password must contain 8 characteres and at least: <br> Lowercase letter. <br> Number. <br> Uppercase letter.</span>
+              <span *ngIf="Rf['password'].getError('required')">password Required</span>
+            </small>
+            <!-- ****************************** -->
+          </div>
+          <div class="col-md-6 input-field">
+            <input required type="password" class="input" name="password_confirmation" formControlName="password_confirmation">
+            <label for="password_confirmation">Password Confirmation</label>
+            <!-- **************ERROR************ -->
+            <small class="text-danger" *ngIf="Rf['password_confirmation']?.touched && Rf['password_confirmation']?.invalid">
+              <span *ngIf="Rf['password_confirmation']?.hasError('required')">Confirmed password Required</span>
+              <span *ngIf="Rf['password_confirmation']?.hasError('Mismatch')">Password doesn't match</span>
+            </small>
+            <!-- *************************** -->
+          </div>
+        </div>
+        <div class="submitDiv">
+          <button class="submit" type="submit" name="submitBtn" [disabled]="registerForm.invalid">Submit</button>
+        </div>
+        <div class="routeTo">
+          <span>You've done?<a routerLink="/dashboard">Click here</a></span>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

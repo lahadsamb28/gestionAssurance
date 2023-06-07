@@ -1,0 +1,122 @@
+  <div class="container main">
+      <div class="row rowGroup">
+          <div class="col-md-12">
+            <i class="bi bi-person-circle"></i>
+            <h5 class="username">{{profil.name}}</h5><br>
+            <hr>
+            <div class="alert alert-success" role="alert" *ngIf="message"><span>{{message}}</span></div>
+            <div class="alert alert-danger" role="alert" *ngIf="errMessage"><span>{{errMessage}}</span></div>
+          </div>
+      </div>
+      <form (ngSubmit)="onUpdate()" class="form" #profilGroup="ngForm">
+      <div class="row inputsGroup">
+        <div class="row input-box">
+          <!-- ************************NIN****************** -->
+          <div class="col-md-6 input-field">
+            <input type="number" class="input" name="NIN" required pattern="[0-9]{13}" [(ngModel)]="profil.NIN" #NIN="ngModel">
+            <label for="NIN">NIN</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="NIN.touched && NIN.invalid">
+              <span *ngIf="NIN.errors?.['required']">NIN is required</span>
+              <span *ngIf="NIN.errors?.['pattern']">Invalid NIN</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+          <!-- *****************TYPE OF USER******************* -->
+          <div class="col-md-6 input-field">
+            <select name="typeOfUSer" class="input" required [(ngModel)]="profil.typeOfUser" #typeOfUser="ngModel">
+              <option disabled selected value></option>
+              <option value="admin">ADMIN</option>
+              <option value="simple">SIMPLE</option>
+            </select>
+            <label for="typeOfUSer">Type of user</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="typeOfUser.invalid && typeOfUser.touched">
+              <span *ngIf="typeOfUser.errors?.['required']">typeOfUser is required</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <!-- ***************full Name******************** -->
+          <div class="col-md-6 input-field">
+            <input required type="text" class="input" name="name" [(ngModel)]="profil.name" #name="ngModel">
+            <label for="name">Full Name</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="name.invalid && name.touched">
+              <span *ngIf="name.errors?.['required']">name is required</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+          <!--****************** GENDER  ************* -->
+          <div class="col-md-6 input-field">
+            <select name="gender" class="input" required [(ngModel)]="profil.gender" #gender="ngModel">
+              <option disbled selected value></option>
+              <option value="HOMME">HOMME</option>
+              <option value="FEMME">FEMME</option>
+            </select>
+            <label for="gender">Gender</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="gender.invalid && gender.touched">
+              <span *ngIf="gender.errors?.['required']">gender is required</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <!--********** DATE oF BIRTH*************-->
+          <div class="col-md-6 input-field">
+            <input required type="date" class="input" name="dateOfBirth" [(ngModel)]="profil.dateOfBirth" #dateOfBirth="ngModel">
+            <label for="dateOfBirth" class="birth">Date Of Birth</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="dateOfBirth.invalid && dateOfBirth.touched">
+              <span *ngIf="dateOfBirth.errors?.['required']">dateOfBirth is required</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+          <!-- **********TEL*********** -->
+          <div class="col-md-6 input-field">
+            <input required type="tel" class="input" name="phone" pattern="(221)(77|78|76|75)[0-9]{7}" [(ngModel)]="profil.phone" #phone="ngModel">
+            <label for="phone">Tel</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="phone.invalid && phone.touched">
+              <span *ngIf="phone.errors?.['required']">phone is required</span>
+              <span *ngIf="phone.errors?.['pattern']">invalid number</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+        </div>
+
+        <div class="row input-box">
+          <div class="col-md-6 input-field">
+            <input required type="email" class="input" name="email" [(ngModel)]="profil.email" #email="ngModel">
+            <label for="email">Email</label>
+            <!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="email.invalid && email.touched">
+              <span *ngIf="email.errors?.['required']">email is required</span>
+              <span *ngIf="email.errors?.['type']">Invalid Email</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+          <!-- *************** LOGIN***********-->
+          <div class="col-md-6 input-field">
+            <input required type="text" class="input" name="login" pattern="(?=.*?[a-z])(?=.*?[0-9]).{8,16}" [(ngModel)]="profil.login" #login="ngModel">
+            <label for="login">Login</label><!-- **********ERRORS**************** -->
+            <small class="text-danger" *ngIf="login.invalid && login.touched">
+              <span *ngIf="login.errors?.['required']">login is required</span>
+              <span *ngIf="login.errors?.['pattern']">Invalid login</span>
+            </small>
+            <!-- ******************************* -->
+          </div>
+        </div>
+
+      </div>
+      <div class="submitDiv">
+        <button class="submit" type="submit" name="submitBtn" [disabled]="profilGroup.invalid">update</button>
+        <a class="submit" type="submit" name="cancelBtn" routerLink="/login">cancel</a>
+      </div>
+    </form>
+
+  </div>

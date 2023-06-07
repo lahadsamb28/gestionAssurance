@@ -32,7 +32,7 @@ class StockController extends Controller
 
         if(! $stocks ){
             throw ValidationException::withMessages([
-                'numero stock' => 'les numeros de stock saisis sont indisponibles'
+                'error' => 'les stocks sont indisponibles'
             ]);
         }
         return response([

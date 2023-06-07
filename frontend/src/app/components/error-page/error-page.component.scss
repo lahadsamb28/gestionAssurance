@@ -1,0 +1,33 @@
+.errorPage{
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+.rowError{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  .status{
+    color: #4d4e56;
+    font-size: 4rem;
+    font-weight: 800;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  .errorText{
+    color: #222325;
+    font-size: 3.5rem;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}

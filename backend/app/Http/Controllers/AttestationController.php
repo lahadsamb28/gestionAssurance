@@ -73,10 +73,10 @@ class AttestationController extends Controller
         //MOdel created
         try {
             if($last_id_certificat >= $last_num_stock){
-                throw new Exception("Ce stock est epuise", 403);
+                throw new Exception("this stock is sold out", 403);
             }
             if(($last_num_stock - $last_id_certificat) == 1){
-                echo "derniere attestation dans ce stock veuillez ajouter un nouvel stock pour le prochain certificat";
+                echo "last item in this stock";
             }
 
             if($request->has(app(Proprietaire::class)->getFillable())){

@@ -1,0 +1,164 @@
+.wrapper{
+  background: #ececec;
+  padding: 0 20px 0 20px;
+}
+  .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .text{
+    background-image: url('../../../assets/sideImage2.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    border-radius: 10px 0 0 10px;
+
+  }
+
+.rowGroup{
+  width: 1150px;
+  height: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+}
+.form-group{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.form-box{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 5%;
+}
+.form-box header{
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 45px;
+  font-size: 2rem;
+  color: rgba(37, 95, 156, 0.9);
+  text-decoration: underline;
+}
+
+form .input-box{
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 5%;
+  padding: 0 20px;
+}
+
+form .input-box .input-field{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0 10px 0 10px;
+  .input{
+    height: 40px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: black;
+    border-radius: 7px;
+    padding: 0 10px;
+  }
+  .input.ng-touched.ng-invalid{
+    border-bottom: 1px solid red;
+  }
+  .input.ng-touched.ng-valid{
+    border-bottom: 1px solid green;
+  }
+
+  label{
+    pointer-events: none;
+    font-size: 15px;
+    color: #4d4e56;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    transition: .5s;
+  }
+  input[type=date]{
+    padding: 0 110px;
+  }
+  .input:focus ~ label{
+    top: -10px;
+    font-size: 13px;
+  }
+  .input:valid ~ label{
+    top: -10px;
+    font-size: 13px;
+    color: #40414a;
+  }
+  .input:focus, .input:valid{
+    border-radius: 7px;
+    border-bottom: 1px solid #743ae1;
+    box-shadow: 5px 5px #ececec;
+  }
+}
+
+.submitDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7%;
+}
+
+.submit{
+  width: 125px;
+  border: none;
+  outline: none;
+  height: 45px;
+  background: #ececec;
+  border-radius: 10px;
+  transition: .4s;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0;
+}
+.submit:hover{
+  background: rgba(37, 95, 156, 0.9);
+  color: #fff;
+}
+.submit:disabled:hover{
+  cursor: not-allowed;
+    background: #ececec;
+}
+
+
+
+.routeTo{
+  text-align: center;
+  font-size: small;
+  margin-top: 15px;
+  span a{
+    text-decoration: none;
+    font-weight: 700;
+    color: black;
+    transition: .5s;
+  }
+  span a:hover{
+    text-decoration: underline;
+    color: rgba(37, 95, 156, 0.9);
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .text{
+    display: none;
+  }
+
+  .rowGroup{
+    max-width: 520px;
+    height: 100%;
+    width: 100%;
+  }
+}
