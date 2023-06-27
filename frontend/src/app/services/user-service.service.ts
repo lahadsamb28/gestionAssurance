@@ -43,7 +43,6 @@ export class UserServiceService {
       console.log(access_token)
     }else if(token_expires_at < current_date){
       this.isLoggedIn.next(false);
-      localStorage.clear();
       console.log("session expired please signin again");
     }else{
       this.isLoggedIn.next(false);

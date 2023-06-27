@@ -14,6 +14,9 @@ const routes: Routes = [
   {path: 'user/register', component: RegisterComponent, canActivate:[IsAdminGuard]},
   {path: 'user/profil/:id', component: ProfilComponent, canActivate:[AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+
+
+  // ***********error and default pages
   {path: '', redirectTo: '/login', pathMatch:'full'},
   {path: '**', component: ErrorPageComponent},
 ];
