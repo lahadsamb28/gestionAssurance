@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   onSignin(){
     if(this.loginForm.valid){
-      this.userService.signin(this.loginForm.value,).subscribe((resp: any) => {
+      this.userService.signin(this.loginForm.value).subscribe((resp: any) => {
         localStorage.setItem('user', JSON.stringify(resp));
         localStorage.setItem('access_token', JSON.stringify(resp.access_token));
         localStorage.setItem('user_type', JSON.stringify(resp.user_type));

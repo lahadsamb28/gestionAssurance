@@ -12,6 +12,10 @@ import { UserServiceService } from './services/user-service.service';
 import { ProfilComponent } from './components/profil/profil.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { MailSentComponent } from './components/mail-sent/mail-sent.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +25,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ProfilComponent,
     DashboardComponent,
     NavbarComponent,
+    ForgetPasswordComponent,
+    MailSentComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

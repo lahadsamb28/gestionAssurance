@@ -1,28 +1,102 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container-fluid ">
-    <a href="" class="navbar-brand fw-bold fs-4"><img src="../../../assets/sideImage.jpg" alt="img" id="brand">LAHAD'S INSURANCE</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+  <div class="container-fluid">
+    <a href="" class="navbar-brand fw-bold fs-4"
+      ><img src="../../../assets/sideImage.jpg" alt="img" id="brand" />
+      INSURANCEMA</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item" [ngStyle]="{'text-transform': 'uppercase'}" class="home"><a class="nav-link pe-3 me-4 fw-bold active" aria-current="page" href="">home</a></li>
-        <li class="nav-item" [ngStyle]="{'text-transform': 'uppercase'}" class="attestations"><a class="nav-link pe-3 me-4 fw-bold" href="">attestations</a></li>
-        <li class="nav-item" [ngStyle]="{'text-transform': 'uppercase'}" class="stocks"><a class="nav-link pe-3 me-4 fw-bold" href="">stocks</a></li>
-        <li class="nav-item" [ngStyle]="{'text-transform': 'uppercase'}" class="users"><a class="nav-link pe-3 me-4 fw-bold" href="">users</a></li>
-        <li class="nav-item" [ngStyle]="{'text-transform': 'uppercase'}" class="users"><a class="nav-link pe-3 me-4 fw-bold" href="">Contact</a></li>
+        <li class="nav-item" class="home" *ngIf="isLogged">
+          <a
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link pe-3 me-4 fw-bold"
+            aria-current="page"
+            href=""
+            >home</a
+          >
+        </li>
+        <li class="nav-item" class="attestations" *ngIf="isLogged">
+          <a
+            routerLink="/dashboard/attestations"
+            routerLinkActive="active"
+            class="nav-link pe-3 me-4 fw-bold"
+            >attestations</a
+          >
+        </li>
+        <li class="nav-item" class="stocks" *ngIf="isLogged">
+          <a
+            routerLink="/dashboard/stocks"
+            routerLinkActive="active"
+            class="nav-link pe-3 me-4 fw-bold"
+            >stocks</a
+          >
+        </li>
+        <li class="nav-item" class="users" *ngIf="isLogged">
+          <a
+            routerLink="/dashboard/users"
+            routerLinkActive="active"
+            class="nav-link pe-3 me-4 fw-bold"
+            >users</a
+          >
+        </li>
+        <li class="nav-item" class="about" *ngIf="!isLogged">
+          <a
+            routerLink="/about"
+            routerLinkActive="active"
+            class="nav-link pe-3 me-4 fw-bold"
+            >About</a
+          >
+        </li>
+        <li class="nav-item" class="contact">
+          <a
+            routerLink="/contact"
+            routerLinkActive="active"
+            class="nav-link pe-3 me-4 fw-bold"
+            >Contact</a
+          >
+        </li>
       </ul>
-      <ul class="navbar-nav icons ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav icons ms-auto mb-2 mb-lg-0" *ngIf="isLogged">
         <li class="nav-item pe-3">
           <div class="btn-group">
-            <a href="" class="btn bi bi-bell fs-5" role="button" id="notificationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <a
+              href=""
+              class="btn bi bi-bell fs-5"
+              role="button"
+              id="notificationMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               <span class="num rounded-circle">5</span>
-              <span class="fw-bold" [ngStyle]="{'margin-left': '10px'}">Notifications</span>
+              <span class="fw-bold" [ngStyle]="{'font-size' : '18px'}"
+                >Notifications</span
+              >
             </a>
-            <ul class="dropdown-menu" aria-labelledby="notificationMenuLink" id="box">
-              <li><h2 class="dropdown-header">Notifications - <span>5</span></h2></li>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="notificationMenuLink"
+              id="box"
+            >
+              <li>
+                <h2 class="dropdown-header">Notifications - <span>5</span></h2>
+              </li>
               <li>
                 <a href="" class="dropdown-item">
                   <div class="notifications-item">
-                    <span class="bi bi-envelope" ></span>
+                    <span class="bi bi-envelope"></span>
                     <div class="text">
                       <h4>Lahad SAMB</h4>
                       <p>Stock epuisé</p>
@@ -33,7 +107,7 @@
               <li>
                 <a href="" class="dropdown-item">
                   <div class="notifications-item">
-                    <span class="bi bi-envelope-open" ></span>
+                    <span class="bi bi-envelope-open"></span>
                     <div class="text">
                       <h4>Lahad SAMB</h4>
                       <p>rechargement stock reussi!</p>
@@ -46,13 +120,44 @@
         </li>
         <li class="nav-item">
           <div class="btn-group">
-            <a href="" class="btn bi bi-person-circle fs-5" role="button" id="profilMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-              <span class="fw-bold">Lahad SAMB</span>
+            <a
+              href=""
+              class="btn bi bi-person-circle fs-5"
+              role="button"
+              id="profilMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <span class="fw-bold" [ngStyle]="{'font-size' : '18px'}">{{username}}</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="profilMenuLink">
-              <li><a href="" class="dropdown-item"><span [ngStyle]="{'margin-right': '7px'}" class="bi bi-pencil-square"></span>Edit</a></li>
-              <li><a href="" class="dropdown-item"><span [ngStyle]="{'margin-right': '7px'}" class="bi bi-gear"></span>Setting</a></li>
-              <li><a href="" class="dropdown-item"><span [ngStyle]="{'margin-right': '7px'}" class="bi bi-box-arrow-left"></span>Logout</a></li>
+              <li>
+                <a href="" class="dropdown-item"
+                  ><span
+                    [ngStyle]="{ 'margin-right': '7px' }"
+                    class="bi bi-pencil-square"
+                  ></span
+                  >Edit</a
+                >
+              </li>
+              <li>
+                <a href="" class="dropdown-item"
+                  ><span
+                    [ngStyle]="{ 'margin-right': '7px' }"
+                    class="bi bi-gear"
+                  ></span
+                  >Setting</a
+                >
+              </li>
+              <li>
+                <button (click)="onLogout()" href="" class="dropdown-item">
+                  <span
+                    [ngStyle]="{ 'margin-right': '7px' }"
+                    class="bi bi-box-arrow-left"
+                  ></span
+                  >Logout
+                </button>
+              </li>
             </ul>
           </div>
         </li>

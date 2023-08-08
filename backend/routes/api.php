@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)->group(function (){
     Route::post('login', 'Login');
+    Route::post('/forgot-password', 'forgotPassword');
+    Route::post('/reset-password', 'resetPassword');
+
+
     Route::post('register', 'Register')->middleware(['auth:sanctum']);
     Route::get('profil/show', 'Show')->middleware(['auth:sanctum']);
     Route::get('profil/edit/{id}', 'Edit')->middleware(['auth:sanctum']);

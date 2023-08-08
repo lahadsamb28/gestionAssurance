@@ -15,14 +15,5 @@ export class DashboardComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  onLogout(){
-    this.userService.logout().subscribe((res: any) => {
-      console.log(res.message);
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('user_type')
-      this.passMessage.setMessage(res.message);
-      this.router.navigate(['/login'])
-    })
 
-  }
 }

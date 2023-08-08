@@ -14,6 +14,7 @@ export class ReverseAuthGuard implements CanActivate {
     return this.userService.status().pipe(take(1), map((isLogged: boolean) => {
       if(isLogged){
         this.router.navigate(['/dashboard'])
+        console.log('user is already logged in');
         return false
       }else{
         return true

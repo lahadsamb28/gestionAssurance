@@ -8,16 +8,21 @@ import { AuthGuard } from './services/auth.guard';
 import { IsAdminGuard } from './services/is-admin.guard';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { ReverseAuthGuard } from './services/reverse-auth.guard';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { MailSentComponent } from './components/mail-sent/mail-sent.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[ReverseAuthGuard]},
+  {path: 'forget-password', component: ForgetPasswordComponent},
+  {path: 'forget-password/mail-sent', component: MailSentComponent},
+  {path: 'reset-password', component: ResetPasswordComponent, data: {token: ''}},
   {path: 'user/register', component: RegisterComponent, canActivate:[IsAdminGuard]},
   {path: 'user/profil/:id', component: ProfilComponent, canActivate:[AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
 
-
   // ***********error and default pages
-  {path: '', redirectTo: '/login', pathMatch:'full'},
+  {path: '', redirectTo: '/dashboard', pathMatch:'full'},
   {path: '**', component: ErrorPageComponent},
 ];
 

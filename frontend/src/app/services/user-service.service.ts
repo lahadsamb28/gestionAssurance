@@ -44,11 +44,9 @@ export class UserServiceService {
     }else if(token_expires_at < current_date){
       this.isLoggedIn.next(false);
       console.log("session expired please signin again");
-    }else{
-      this.isLoggedIn.next(false);
-      console.log("please signin again!")
+    }else if(!access_token){
+      console.log("user not logged in !");
     }
-
     return this.isLoggedIn.asObservable();
   }
   statusType(){
@@ -65,7 +63,9 @@ export class UserServiceService {
     }
     return this.isAdmin.asObservable();
   }
-
+  changeStatus(value: boolean){
+    this.isLoggedIn.next(value)
+  }
 
   register(data: any): Observable<any>{
     return this.httpClient.post<any>(this.backend_url+'register', data, this.getTokens());
@@ -85,6 +85,12 @@ export class UserServiceService {
   }
   logout(): Observable<any>{
     return this.httpClient.get<any>(this.backend_url+'logout', this.getTokens());
+  }
+  forgotPassword(data: any): Observable<any>{
+    return this.httpClient.post<any>(this.backend_url+'forgot-password', data);
+  }
+  resetPassword(data: any){
+    return this.httpClient.post<any>(this.backend_url+'reset-password', data);
   }
 
 }
