@@ -14,7 +14,7 @@
         <div class="row input-box">
           <!-- ************************NIN****************** -->
           <div class="col-md-6 input-field">
-            <input required type="text" class="input" name="NIN" formControlName="NIN">
+            <input id="NIN" required type="text" class="input" name="NIN" formControlName="NIN">
             <label for="NIN">NIN</label>
             <!-- error div -->
             <small class="text-danger" *ngIf="Rf['NIN']?.touched && Rf['NIN']?.invalid">
@@ -26,7 +26,7 @@
           </div>
           <!-- *****************TYPE OF USER******************* -->
           <div class="col-md-6 input-field">
-            <select name="typeOfUSer" class="input" required formControlName="typeOfUser">
+            <select id="typeOfUSer" name="typeOfUSer" class="input" required formControlName="typeOfUser">
               <option disabled selected value></option>
               <option *ngFor="let typeOfUSer of TypeOfUser" [ngValue]="typeOfUSer">{{typeOfUSer}}</option>
             </select>
@@ -42,7 +42,7 @@
         <div class="row input-box">
           <!-- ***************full Name******************** -->
           <div class="col-md-6 input-field">
-            <input required type="text" class="input" name="name" formControlName="name">
+            <input id="name" required type="text" class="input" name="name" formControlName="name" autocomplete="on">
             <label for="name">Full Name</label>
             <!-- *********ERROR DIV -->
             <small class="text-danger" *ngIf="Rf['name']?.invalid && Rf['name']?.touched"> <span>Full Name Required</span></small>
@@ -50,7 +50,7 @@
           </div>
           <!--****************** GENDER  *************-->
           <div class="col-md-6 input-field">
-            <select name="gender" class="input" required formControlName="gender">
+            <select id="gender" name="gender" class="input" required formControlName="gender">
               <option disbled selected value></option>
               <option *ngFor="let gender of Gender" [ngValue]="gender">{{gender}}</option>
             </select>
@@ -66,7 +66,7 @@
         <div class="row input-box">
           <!--********** DATE oF BIRTH*************-->
           <div class="col-md-6 input-field">
-            <input required type="date" class="input" name="dateOfBirth" formControlName="dateOfBirth">
+            <input id="dateOfBirth" required type="date" class="input" name="dateOfBirth" formControlName="dateOfBirth">
             <label for="dateOfBirth" class="birth">Date Of Birth</label>
             <!-- ************error*************** -->
             <small class="text-danger" *ngIf="Rf['dateOfBirth']?.touched && Rf['dateOfBirth']?.invalid">
@@ -76,7 +76,7 @@
           </div>
           <!-- **********TEL*********** -->
           <div class="col-md-6 input-field">
-            <input required type="tel" class="input" name="phone" formControlName="phone">
+            <input id="phone" required type="tel" class="input" name="phone" formControlName="phone" autocomplete="on">
             <label for="phone">Tel</label>
             <!-- ***************error************  -->
             <small class="text-danger" *ngIf="Rf['phone']?.touched && Rf['phone']?.invalid">
@@ -89,7 +89,7 @@
 
         <div class="row input-box">
           <div class="col-md-6 input-field">
-            <input required type="email" class="input" name="email" formControlName="email">
+            <input id="email" required type="email" class="input" name="email" formControlName="email" autocomplete="on">
             <label for="email">Email</label>
             <small class="text-danger" *ngIf="Rf['email']?.touched && Rf['email']?.invalid">
               <span *ngIf="Rf['email']?.hasError('email')">invalid email</span>
@@ -98,7 +98,7 @@
           </div>
           <!-- *************** LOGIN***********-->
           <div class="col-md-6 input-field">
-            <input required type="text" class="input" name="login" formControlName="login">
+            <input id="login" required type="text" class="input" name="login" formControlName="login">
             <label for="login">Login</label>
             <!-- *************ERROR ************ -->
             <small class="text-danger" *ngIf="Rf['login']?.touched && Rf['login']?.invalid">
@@ -111,7 +111,7 @@
 
         <div class="row input-box">
           <div class="col-md-6 input-field">
-            <input required type="password" class="input" name="password" formControlName="password">
+            <input id="password" required type="password" class="input" name="password" formControlName="password">
             <label for="password">Password</label>
              <!-- *************ERROR ************ -->
              <small class="text-danger" *ngIf="Rf['password']?.touched && Rf['password']?.invalid">
@@ -121,7 +121,7 @@
             <!-- ****************************** -->
           </div>
           <div class="col-md-6 input-field">
-            <input required type="password" class="input" name="password_confirmation" formControlName="password_confirmation">
+            <input id="password_confirmation" required type="password" class="input" name="password_confirmation" formControlName="password_confirmation">
             <label for="password_confirmation">Password Confirmation</label>
             <!-- **************ERROR************ -->
             <small class="text-danger" *ngIf="Rf['password_confirmation']?.touched && Rf['password_confirmation']?.invalid">

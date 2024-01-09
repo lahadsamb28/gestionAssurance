@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomvalidationService } from './services/customvalidation.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit{
   title = 'frontend';
-  constructor(){}
+  visible: any;
+  constructor(private nav: CustomvalidationService){}
   ngOnInit(): void {
-
+    this.nav.checkBarVisibility().subscribe((visibility: boolean) => {
+      Promise.resolve().then(() => this.visible = visibility)
+    })
   }
 }

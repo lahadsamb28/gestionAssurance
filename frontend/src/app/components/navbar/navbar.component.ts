@@ -18,15 +18,16 @@ export class NavbarComponent implements OnInit{
       this.isLogged = statusLogged;
     })
 
-    const user: any = localStorage.getItem('user')
-    this.username = JSON.parse(user).user;
+    this.userService.getUserName().subscribe((user_name: string) => {
+      this.username = user_name;
+    })
   }
 
   onLogout(){
     this.userService.logout().subscribe((res: any) => {
       console.log(res.message);
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('user_type')
+      localStorage.clear()
+      this.passMessage.changeBarVisibility(true);
       this.userService.changeStatus(false);
       this.passMessage.setMessage(res.message);
       this.router.navigate(['/login'])

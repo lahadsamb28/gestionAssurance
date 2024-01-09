@@ -1,0 +1,54 @@
+<nav class="sidebar" [ngClass]="collapsed ? 'sidenav-collapsed' : 'sidenav-hold'" *ngIf="isLogged">
+  <header>
+    <div class="image-text">
+      <div class="text header-text">
+        <span class="ab" *ngIf="!collapsed">IM</span>
+        <span class="ab" *ngIf="collapsed">INSURANCEMA</span>
+        <span class="name" *ngIf="collapsed">Insurance Management</span>
+      </div>
+    </div>
+    <button (click)="onCollapse()" *ngIf="!collapsed"><i class="bi bi-chevron-right toggle" ></i></button>
+    <button (click)="onHold()" *ngIf="collapsed" ><i class="bi bi-chevron-left toggle" ></i></button>
+  </header>
+
+  <div class="menu-bar">
+    <div class="menu">
+      <li class="principal-box">
+        <a href="" class="principalBtn"><i class="bi bi-plus iconP"></i><span class="text nav-text" *ngIf="collapsed">ADD ATTESTATION</span></a>
+      </li>
+      <hr>
+      <ul class="menu-links">
+        <li class="nav-link">
+          <a href="">
+            <i class="bi bi-house-door icon"></i>
+            <span class="text nav-text" *ngIf="collapsed">HOME</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="">
+            <i class="bi bi-bar-chart-line icon"></i>
+            <span class="text nav-text" *ngIf="collapsed">STATISTICS</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="">
+            <i class="bi bi-pencil-square icon"></i>
+            <span class="text nav-text" *ngIf="collapsed">EDIT ATTESTATION</span>
+          </a>
+        </li>
+        <li class="nav-link">
+          <a href="">
+            <i class="bi bi-trash icon"></i>
+            <span class="text nav-text" *ngIf="collapsed">DELETE ATTESTATION</span>
+          </a>
+        </li>
+        <li class="nav-link backToHome">
+          <a href="">
+            <i class="bi bi-box-arrow-left icon"></i>
+            <span class="text nav-text" *ngIf="collapsed">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

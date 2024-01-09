@@ -12,8 +12,9 @@ export class ErrorPageComponent implements OnInit{
   code = 404;
   errMessage= "Page Not Found";
 
-  constructor(){}
+  constructor(private control: CustomvalidationService){}
   ngOnInit(): void {
+    this.control.changeBarVisibility(false);
   }
 
 }

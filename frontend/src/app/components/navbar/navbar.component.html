@@ -30,7 +30,7 @@
         </li>
         <li class="nav-item" class="attestations" *ngIf="isLogged">
           <a
-            routerLink="/dashboard/attestations"
+            routerLink="attestations"
             routerLinkActive="active"
             class="nav-link pe-3 me-4 fw-bold"
             >attestations</a
@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item" class="stocks" *ngIf="isLogged">
           <a
-            routerLink="/dashboard/stocks"
+            routerLink="stocks"
             routerLinkActive="active"
             class="nav-link pe-3 me-4 fw-bold"
             >stocks</a
@@ -46,7 +46,7 @@
         </li>
         <li class="nav-item" class="users" *ngIf="isLogged">
           <a
-            routerLink="/dashboard/users"
+            routerLink="users"
             routerLinkActive="active"
             class="nav-link pe-3 me-4 fw-bold"
             >users</a
@@ -127,6 +127,7 @@
               id="profilMenuLink"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              arua-haspopup="true"
             >
               <span class="fw-bold" [ngStyle]="{'font-size' : '18px'}">{{username}}</span>
             </a>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehicules', function (Blueprint $table) {
             $table->id();
-            $table->enum('typeDeVehicule', ['Véhicule Particulier','Camionnette','Tricycle','Quadricycle','Transport en commun','Moto','Tracteur routier']);
+            $table->enum('typeDeVehicule', ['Vehicule Particulier','Camionnette','Tricycle','Quadricycle','Transport en commun','Moto','Tracteur routier']);
             $table->string('immatriculation');
             $table->enum('categorie', ['coupe','berline','hayons','break','limousines','pick-up','crossovers','SUV','fourgonnettes','mini-fourgonnettes','carrosserie liftback','cabriolets','minibus','roadsters','targa']);
             $table->string('marque');

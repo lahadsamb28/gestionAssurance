@@ -19,14 +19,15 @@ export class LoginComponent implements OnInit {
   loginModel= new Login();
 
 
-  constructor(private userService: UserServiceService, private router: Router, private fb: FormBuilder, private sharedMessage:CustomvalidationService ) {}
+  constructor(private userService: UserServiceService, private router: Router, private fb: FormBuilder, private control:CustomvalidationService ) {}
 
   ngOnInit(): void {
-    this.message = this.sharedMessage.getMessage()
+    this.message = this.control.getMessage()
     this.loginForm = this.fb.group({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, Validators.required)
     })
+
   }
 
   get Lf(){

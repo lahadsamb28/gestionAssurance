@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Profil } from 'src/app/models/user.model';
+import { CustomvalidationService } from 'src/app/services/customvalidation.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class ProfilComponent implements OnInit{
   id: any;
   loggedIn: boolean = false;
 
-  constructor(private userService: UserServiceService, private router: Router, private route: ActivatedRoute){}
+  constructor(private userService: UserServiceService, private router: Router, private route: ActivatedRoute, private custom: CustomvalidationService){}
 
   ngOnInit(): void {
 
@@ -27,6 +28,8 @@ export class ProfilComponent implements OnInit{
     this.id = Number(routeParams.get('id'));
 
     this.getUser(this.id);
+
+    this.custom.changeBarVisibility(false);
   }
 
   getUser(idUser: number){

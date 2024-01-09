@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 export class CustomvalidationService {
   message!: string;
   code!: number;
+  visible = new BehaviorSubject<boolean>(true);
   constructor() { }
 
   MatchPassword(password: any, confirmpassword: any){
@@ -44,4 +46,12 @@ export class CustomvalidationService {
   getCode(){
     return this.code;
   }
+
+  changeBarVisibility(value: boolean){
+    this.visible.next(value);
+  }
+  checkBarVisibility(){
+    return this.visible.asObservable();
+  }
+
 }

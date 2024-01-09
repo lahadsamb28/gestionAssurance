@@ -1,0 +1,186 @@
+<!-- MultiStep Form -->
+<div class="container-fluid" id="grad1">
+  <div class="row justify-content-center mt-0">
+      <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+          <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+              <h2><strong>Add New Certificate</strong></h2>
+              <p>Fill all form field to go to next step</p>
+              <div class="row">
+                  <div class="col-md-12 mx-0">
+                      <form id="msform" [formGroup]="attestationForm">
+                          <!-- progressbar -->
+                          <ul id="progressbar">
+                              <li class="active" id="certificate"><strong>Certificate</strong></li>
+                              <li [class.active]="step >= 1" id="proprietaire"><strong>Proprietaire</strong></li>
+                              <li [class.active]="step >= 2" id="vehicule"><strong>Vehicule</strong></li>
+                              <li [class.active]="step >= 3" id="confirm"><strong>Finish</strong></li>
+                          </ul>
+                          <!-- fieldsets -->
+                          <fieldset *ngIf="step == 0" id="field0">
+                              <div class="form-card">
+                                  <h2 class="fs-title">Certificate Information</h2>
+                                  <div class="radio-group">
+                                    <div  *ngFor="let typeCertificat of TypeCertificat" class='radio'>
+                                      <label [class.selected]="typeCertificat.type === typeOfCertificat">
+                                        <input type="radio" name="typeC" value="{{typeCertificat.type}}" id="{{typeCertificat.type}}" formControlName="typeC" >
+                                        <span class="typeTitle">{{typeCertificat.type}}</span>
+                                        <span class="typeSubTitle">
+                                          <img src="{{typeCertificat.logo}}" width="50px" height="30px">
+                                          {{typeCertificat.duree}}
+                                        </span>
+                                      </label>
+                                    </div>
+                                    <br>
+                                  </div>
+                                </div>
+                                <small  *ngIf="Att['typeC']?.invalid && Att['typeC']?.untouched " class="text-danger">To continue: Choose One</small>
+                                <input *ngIf="Att['typeC']?.valid" type="button" name="next" (click)="nextStep()" class="next action-button" value="Next Step"/>
+                          </fieldset>
+                          <fieldset *ngIf="step == 1" id="field1">
+                              <div class="form-card">
+                                  <h2 class="fs-title">Proprietaire Information</h2>
+
+                                  <div class="row">
+                                    <div class="col-md-6 input-field">
+                                      <input type="text" name="prenom" placeholder="First Name" formControlName="prenom"/>
+                                      <small class="text-danger" *ngIf="Att['prenom']?.touched && Att['prenom']?.invalid"><span>prenom obligatoire</span></small>
+                                    </div>
+
+                                    <div class="col-md-6 input-field">
+                                      <input type="text" name="nom" placeholder="Last Name" formControlName="nom"/>
+                                      <small class="text-danger" *ngIf="Att['nom']?.touched && Att['nom']?.invalid"><span>nom obligatoire</span></small>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6 input-field">
+                                      <select name="sexe" required formControlName="sexe">
+                                        <option disabled selected value>Sexe</option>
+                                        <option *ngFor="let sexe of Sexe" [ngValue]="sexe">{{sexe}}</option>
+                                      </select>
+                                      <small class="text-danger" *ngIf="Att['sexe']?.touched && Att['sexe']?.invalid"><span>Sexe obligatoire</span></small>
+                                    </div>
+
+                                    <div class="col-md-6 input-field">
+                                      <input type="date" name="dateDeNaissance" formControlName="dateDeNaissance" placeholder="Date De Naissance"/>
+                                      <small class="text-danger" *ngIf="Att['dateDeNaissance']?.touched && Att['dateDeNaissance']?.invalid"><span>date De naissance obligatoire</span></small>
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-md-6 input-field">
+                                      <input type="text" name="adresse" formControlName="adresse" placeholder="Adresse Du Domicile"/>
+                                      <small class="text-danger" *ngIf="Att['adresse']?.touched && Att['adresse']?.invalid"><span>adresse obligatoire</span></small>
+                                    </div>
+
+                                    <div class="col-md-6 input-field">
+                                      <input type="tel" name="telephone" formControlName="telephone" placeholder="Numero De Telephone"/>
+                                      <small class="text-danger" *ngIf="Att['telephone']?.touched && Att['telephone']?.invalid">
+                                        <span  *ngIf="Att['telephone']?.hasError('pattern')">invalid number</span>
+                                        <span *ngIf="Att['telephone']?.hasError('required')">telephone required</span>
+                                      </small>
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-md-6 input-field">
+                                      <input type="email" name="email" formControlName="email" placeholder="Email"/>
+                                      <small class="text-danger" *ngIf="Att['email']?.touched && Att['email']?.invalid">
+                                        <span  *ngIf="Att['email']?.hasError('email')">invalid email</span>
+                                        <span *ngIf="Att['email']?.hasError('required')">email required</span>
+                                      </small>
+                                    </div>
+                                    <div class="col-md-6 input-field">
+                                      <input type="text" name="profession" formControlName="profession" placeholder="Profession"/>
+                                      <small class="text-danger" *ngIf="Att['profession']?.touched && Att['profession']?.invalid"><span>profession obligatoire</span></small>
+                                    </div>
+                                  </div>
+                              </div>
+                              <input type="button" name="previous" (click)="previousStep()" class="previous action-button-previous" value="Previous"/>
+                              <input type="button" name="next" (click)="nextStep()" class="next action-button" value="Next Step"/>
+                          </fieldset>
+                          <fieldset *ngIf="step == 2" id="field2">
+                              <div class="form-card">
+                                <h2 class="fs-title">Vehicule Information</h2>
+
+                                <div class="row">
+                                  <div class="col-md-6 input-field">
+                                    <input type="text" name="prenom" placeholder="First Name" formControlName="prenom"/>
+                                    <small class="text-danger" *ngIf="Att['prenom']?.touched && Att['prenom']?.invalid"><span>prenom obligatoire</span></small>
+                                  </div>
+
+                                  <div class="col-md-6 input-field">
+                                    <input type="text" name="nom" placeholder="Last Name" formControlName="nom"/>
+                                    <small class="text-danger" *ngIf="Att['nom']?.touched && Att['nom']?.invalid"><span>nom obligatoire</span></small>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-6 input-field">
+                                    <select name="sexe" required formControlName="sexe">
+                                      <option disabled selected value>Sexe</option>
+                                      <option *ngFor="let sexe of Sexe" [ngValue]="sexe">{{sexe}}</option>
+                                    </select>
+                                    <small class="text-danger" *ngIf="Att['sexe']?.touched && Att['sexe']?.invalid"><span>Sexe obligatoire</span></small>
+                                  </div>
+
+                                  <div class="col-md-6 input-field">
+                                    <input type="date" name="dateDeNaissance" formControlName="dateDeNaissance" placeholder="Date De Naissance"/>
+                                    <small class="text-danger" *ngIf="Att['dateDeNaissance']?.touched && Att['dateDeNaissance']?.invalid"><span>date De naissance obligatoire</span></small>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-md-6 input-field">
+                                    <input type="text" name="adresse" formControlName="adresse" placeholder="Adresse Du Domicile"/>
+                                    <small class="text-danger" *ngIf="Att['adresse']?.touched && Att['adresse']?.invalid"><span>adresse obligatoire</span></small>
+                                  </div>
+
+                                  <div class="col-md-6 input-field">
+                                    <input type="tel" name="telephone" formControlName="telephone" placeholder="Numero De Telephone"/>
+                                    <small class="text-danger" *ngIf="Att['telephone']?.touched && Att['telephone']?.invalid">
+                                      <span  *ngIf="Att['telephone']?.hasError('pattern')">invalid number</span>
+                                      <span *ngIf="Att['telephone']?.hasError('required')">telephone required</span>
+                                    </small>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-md-6 input-field">
+                                    <input type="email" name="email" formControlName="email" placeholder="Email"/>
+                                    <small class="text-danger" *ngIf="Att['email']?.touched && Att['email']?.invalid">
+                                      <span  *ngIf="Att['email']?.hasError('email')">invalid email</span>
+                                      <span *ngIf="Att['email']?.hasError('required')">email required</span>
+                                    </small>
+                                  </div>
+                                  <div class="col-md-6 input-field">
+                                    <input type="text" name="profession" formControlName="profession" placeholder="Profession"/>
+                                    <small class="text-danger" *ngIf="Att['profession']?.touched && Att['profession']?.invalid"><span>profession obligatoire</span></small>
+                                  </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" (click)="previousStep()" class="previous action-button-previous" value="Previous"/>
+                            <input type="button" name="make_payment" class="next action-button" value="Confirm"/>
+                          </fieldset>
+                          <fieldset *ngIf="step == 3" id="field3">
+                              <div class="form-card">
+                                  <h2 class="fs-title text-center">Success !</h2>
+                                  <br><br>
+                                  <div class="row justify-content-center">
+                                      <div class="col-3">
+                                          <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image">
+                                      </div>
+                                  </div>
+                                  <br><br>
+                                  <div class="row justify-content-center">
+                                      <div class="col-7 text-center">
+                                          <h5>You Have Successfully Signed Up</h5>
+                                      </div>
+                                  </div>
+                              </div>
+                          </fieldset>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

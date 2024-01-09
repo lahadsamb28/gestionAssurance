@@ -11,6 +11,7 @@ import { ReverseAuthGuard } from './services/reverse-auth.guard';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { MailSentComponent } from './components/mail-sent/mail-sent.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { AttestationHomePageComponent } from './components/Attestations/attestation-home-page/attestation-home-page.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[ReverseAuthGuard]},
@@ -20,7 +21,7 @@ const routes: Routes = [
   {path: 'user/register', component: RegisterComponent, canActivate:[IsAdminGuard]},
   {path: 'user/profil/:id', component: ProfilComponent, canActivate:[AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-
+  {path: 'attestations', component: AttestationHomePageComponent, canActivate:[AuthGuard]},
   // ***********error and default pages
   {path: '', redirectTo: '/dashboard', pathMatch:'full'},
   {path: '**', component: ErrorPageComponent},

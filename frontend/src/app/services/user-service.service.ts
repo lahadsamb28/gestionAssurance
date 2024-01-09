@@ -9,6 +9,7 @@ export class UserServiceService {
   private backend_url: string = 'http://127.0.0.1:8000/api/';
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   private isAdmin = new BehaviorSubject<boolean>(false);
+  private user_name = new BehaviorSubject<string>('username')
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,30 +26,30 @@ export class UserServiceService {
 
     return httpOptions;
   }
-
+  /*====================================================================================
+                                          Control Access and  guards
+   ===========================================================================================*/
   status(){
     const localData:any = localStorage.getItem('user');
     const user = JSON.parse(localData)
-    if(!user){
-      this.isLoggedIn.next(false);
-      console.log("user not logged in !")
-    }
-
     const userObj: any= localStorage.getItem('access_token');
     const access_token = JSON.parse(userObj);
-    const token_expires_at = new Date(user.token_expires_at);
+    const token_expires_at = new Date(user?.token_expires_at);
     const current_date = new Date();
+
+
     if(access_token){
       this.isLoggedIn.next(true);
+      this.user_name.next(user?.user);
       console.log(access_token)
-    }else if(token_expires_at < current_date){
+    }else if(token_expires_at < current_date || !access_token || !user){
       this.isLoggedIn.next(false);
-      console.log("session expired please signin again");
-    }else if(!access_token){
-      console.log("user not logged in !");
+      console.log("user not logged in");
     }
     return this.isLoggedIn.asObservable();
   }
+
+  // =============== control user type=============================
   statusType(){
     const localData: any = localStorage.getItem('user_type');
     const user_type = JSON.parse(localData);
@@ -63,10 +64,25 @@ export class UserServiceService {
     }
     return this.isAdmin.asObservable();
   }
+
+  // ================Logout change status ====================
   changeStatus(value: boolean){
     this.isLoggedIn.next(value)
   }
 
+  // ======================  get user name =====================
+  getUserName(){
+    return this.user_name.asObservable();
+  }
+
+/* =============================================================================
+                                      END
+  ================================================================================*/
+
+
+  /*  ===================================================================
+                                    API SERVICES
+  =========================================================================*/
   register(data: any): Observable<any>{
     return this.httpClient.post<any>(this.backend_url+'register', data, this.getTokens());
   }

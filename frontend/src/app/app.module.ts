@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule} from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { MailSentComponent } from './components/mail-sent/mail-sent.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AddComponent } from './components/Attestations/add/add.component';
+import { EditComponent } from './components/Attestations/edit/edit.component';
+import { AttestationHomePageComponent } from './components/Attestations/attestation-home-page/attestation-home-page.component';
 
 
 @NgModule({
@@ -28,6 +33,10 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     ForgetPasswordComponent,
     MailSentComponent,
     ResetPasswordComponent,
+    SidebarComponent,
+    AddComponent,
+    EditComponent,
+    AttestationHomePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +44,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     HttpClientModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatRadioModule,
   ],
   providers: [ UserServiceService ],
   bootstrap: [AppComponent]

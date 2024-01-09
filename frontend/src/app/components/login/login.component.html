@@ -20,13 +20,13 @@
           <div class="input-box">
             <header>Login</header>
             <div class="input-field">
-              <input   type="text" class="input" name="username" required  formControlName="username">
-              <label for="username">Username</label>
+              <input  id="username"  type="text" class="input" name="username" autocomplete="on" required  formControlName="username">
+              <label for="username">Username or email</label>
 
               <small *ngIf="Lf['username']?.invalid && Lf['username']?.touched" class="text-danger" [ngStyle]="{'margin-bottom': '15px'}">username is required</small>
             </div>
             <div class="input-field">
-              <input  type="password" class="input" name="password" required formControlName="password">
+              <input  id="password" type="password" class="input" name="password" required formControlName="password">
               <label for="password" >Password</label>
 
               <small *ngIf="Lf['password']?.invalid && Lf['password']?.touched" class="text-danger" [ngStyle]="{'margin-bottom': '15px'}">password is required</small>
